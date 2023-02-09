@@ -1,0 +1,105 @@
+.frame {    
+    width:500px;
+    height:500px;
+    border: 10px solid greenyellow;
+    box-sizing: border-box;
+    margin-top: 10px;  
+    margin-bottom: 10px;
+    @media screen and (max-width: 1280px) {
+      width:400px;
+      height:400px;
+    } 
+    @media screen and (max-width: 768px) {
+        width:300px;
+        height:300px;
+      } 
+
+}
+.frame-row {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    height: 25%;
+}
+.frame-item { 
+    position: relative;   
+    display: flex; 
+    z-index: 99;  
+    align-items: center;   
+    justify-content: center;
+    font-size: 1.5rem;
+    width: 25%; 
+    margin: 1px;   
+    border: 2px solid greenyellow;
+    border-radius: 10px;
+    background-color:goldenrod;
+    box-sizing: border-box;    
+    &:hover {
+        cursor: pointer; 
+        background-color: aquamarine;
+        transform: scale(1.01);            
+    }    
+}
+.frame-size {
+        &:hover {
+        cursor: pointer;
+    }
+}
+.active-size-frame {
+    color: green;    
+}
+
+.empty-item {
+    background-color: white;
+    opacity: .001;        
+    border: 0;   
+}
+.active-dropzone {
+    background-color: orange;
+    opacity: 1; 
+}
+.move-down {
+    animation: to-down .2s;
+}
+.move-up {
+    animation: to-up .2s;
+}
+.move-left {
+    animation: to-left .2s;
+}
+.move-right {
+    animation: to-right .2s;
+}
+
+@keyframes to-down{
+    from {
+        top : -100%;
+      }    
+      to {
+        top: 0;
+      }
+    }
+@keyframes to-up{
+    from {
+        bottom:-100%;
+        }    
+        to {
+        bottom: 0;
+        }
+    }
+@keyframes to-left{
+    from {
+        right:-50px;
+        }    
+        to {
+        right: 0px;
+        }
+    }
+@keyframes to-right{
+    from {
+        left :-50px;
+        }    
+        to {
+        left: 0px;
+        }
+    }
