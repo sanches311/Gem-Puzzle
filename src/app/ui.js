@@ -114,8 +114,8 @@ function getStartHtml() {
           <div class='frame-current'>
               ${getFrameSizeHtml()}
           </div>
+          <span class='frame-size-tex'>Other size:</span>
           <div class='frame-all'>
-            <span class='frame-size-tex'>Other size:</span>
             <button class='frame-size'>3х3</button>
             <button class='frame-size active-size-frame'>4х4</button>
             <button class='frame-size'>5х5</button>
