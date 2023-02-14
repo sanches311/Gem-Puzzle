@@ -17,9 +17,6 @@ getTime();
 listenResult();
 listenCloseWinners();
 listenDrag();
-
 const wrapper = document.querySelector('.wrapper');
 wrapper.style.backgroundImage = `url(${url})`;
 wrapper.style.background = 'contain';
-// eslint-disable-next-line no-console
-console.log(wrapper);

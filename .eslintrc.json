@@ -15,7 +15,8 @@
        // "no-console": 0,
         "class-methods-use-this": "off",
         //"@typescript-eslint/rule-name": "error"
-        //"linebreak-style": ["error", "windows"],
+        // "linebreak-style": ["error", "windows"],
+        // "eslint linebreak-style": ["error", "windows"],
         "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }]
 
     }

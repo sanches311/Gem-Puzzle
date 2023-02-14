@@ -22,7 +22,7 @@ function getFrameSizeHtml() {
     size = saveStore.view;
   }
   return `
-<span class='frame-current-size'> Frame size: ${size}х${size}</span>`;
+<span class='frame-current-size text'> Frame size: ${size}х${size}</span>`;
 }
 const getMoveHtml = () => {
   let count = store.countMove;
@@ -50,15 +50,15 @@ const getTimeHtml = () => {
 const getModalHtml = () => `
   <div class='modal-wrapper'>
     <div class='modal-content'>
-      <div class='modal-win'>
-      Your win!
-      </div>
-      <div class='modal-move'>
-      ${getMoveHtml()}
-      </div>
-      <div class='modal-time'>
-      ${getTimeHtml()}
-      </div>
+        <div class='modal-win'>
+            Your win!
+        </div>
+        <div class='modal-move'>
+            ${getMoveHtml()}
+        </div>
+        <div class='modal-time'>
+            ${getTimeHtml()}
+        </div>
     </div>
   </div>
   `;
@@ -103,8 +103,8 @@ function getStartHtml() {
               <button id = 'result-btn' class='menu-btn'>Result</button>
           </div>
           <div class='info'>
-              <span class='info-move'>${getMoveHtml()}</span>
-              <span class='info-time'>${getTimeHtml()}</span>
+              <span class='info-move text'>${getMoveHtml()}</span>
+              <span class='info-time text'>${getTimeHtml()}</span>
           </div>
           <div class='wrapper-frame'>
           <div class='frame'>
@@ -114,7 +114,7 @@ function getStartHtml() {
           <div class='frame-current'>
               ${getFrameSizeHtml()}
           </div>
-          <span class='frame-size-tex'>Other size:</span>
+          <span class='frame-size-tex text'>Other size:</span>
           <div class='frame-all'>
             <button class='frame-size'>3х3</button>
             <button class='frame-size active-size-frame'>4х4</button>

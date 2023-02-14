@@ -1,6 +1,8 @@
 import store from './store';
 import { checkSaveGame } from './check';
 
+const HEX = ['A', 'B', 'C', 'D', 'E', 'F', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
 /* eslint-disable no-param-reassign */
 const hide = (element) => {
   element.style = 'display:none';
@@ -34,4 +36,16 @@ const getTime = () => {
   });
 };
 
-export { hide, show, getTime };
+const random = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+const generateColor = () => `#${HEX[random(0, 15)]}${HEX[random(0, 15)]}${HEX[random(0, 15)]}${HEX[random(0, 15)]}${HEX[random(0, 15)]}${
+  HEX[random(0, 15)]
+}`;
+const setColor = () => {
+  const puzzles = document.querySelectorAll('.frame-item');
+  // eslint-disable-next-line no-return-assign
+  puzzles.forEach((puzzle) => puzzle.style.background = `${generateColor()}`);
+};
+
+export {
+  hide, show, getTime, generateColor, setColor,
+};

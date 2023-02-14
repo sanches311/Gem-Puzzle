@@ -7,6 +7,7 @@ import {
 } from './set';
 import { checkWin, checkEmptyItem } from './check';
 import { hide, show } from './utils';
+import url from '../public/assets/img/jason-leung-Xaanw0s0pMk-unsplash.jpg';
 
 function listenDrag() {
   const empty = getEmptyItem();
@@ -205,6 +206,9 @@ const listenCloseWinners = () => {
       const winners = document.querySelector('.winnner');
       game.style = 'display:flex';
       winners.style = 'display:none';
+      const wrapper = document.querySelector('.wrapper');
+      wrapper.style.backgroundImage = `url(${url})`;
+      wrapper.style.background = 'contain';
     }
   });
 };
