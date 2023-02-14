@@ -1,11 +1,15 @@
 .info {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
 }
 .count-move {
     font-size: 1rem;
 }
 .count-time {
     font-size: 1rem;
+}
+
+.frame-all {
+  margin-top: 10px;
 }

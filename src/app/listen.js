@@ -8,6 +8,54 @@ import {
 import { checkWin, checkEmptyItem } from './check';
 import { hide, show } from './utils';
 
+function listenDrag() {
+  const empty = getEmptyItem();
+  document.addEventListener('dragstart', (event) => {
+    event.target.classList.add('selected');
+  });
+  document.addEventListener('dragend', (event) => {
+    event.preventDefault();
+    event.target.classList.remove('selected');
+  });
+  empty.addEventListener('dragover', (event) => {
+    event.preventDefault();
+    empty.classList.add('active-dropzone');
+  }, false);
+  empty.addEventListener('dragleave', (event) => {
+    event.preventDefault();
+    empty.classList.remove('active-dropzone');
+  });
+  empty.addEventListener('drop', (event) => {
+    event.preventDefault();
+    const selected = document.querySelector('.selected');
+    if (event.target.closest('.empty-item')) {
+      event.target.classList.remove('active-dropzone');
+      const selectedIdI = selected.id[0];
+      const selectedIdJ = selected.id[1];
+      const emptyIdI = getEmptyItem().id[0];
+      const emptyIdJ = getEmptyItem().id[1];
+      store.out[emptyIdI][emptyIdJ] = store.out[selectedIdI][selectedIdJ];
+      store.out[selectedIdI][selectedIdJ] = ' ';
+      store.countMove += 1;
+      setSoundMove();
+      renderFrame();
+      setSizeItem();
+      renderMove();
+      checkEmptyItem();
+      setMove();
+      setDraggable();
+      if (checkWin()) {
+        const modal = document.querySelector('.modal-wrapper');
+        renderModal();
+        show(modal);
+        store.time.sec = document.getElementById('sec').childNodes[0].nodeValue;
+        store.time.min = document.getElementById('min').childNodes[0].nodeValue;
+        store.win.push({ view: `${store.view}х${store.view}`, countMove: `${store.countMove}`, time: `${store.time.min}:${store.time.sec}` });
+      }
+    }
+    return listenDrag();
+  });
+}
 const listenChangeFrameSize = () => {
   document.addEventListener('click', (event) => {
     if (event.target.closest('.frame-size')) {
@@ -24,6 +72,7 @@ const listenChangeFrameSize = () => {
       checkEmptyItem();
       setTime();
       setDraggable();
+      listenDrag();
     }
   });
 };
@@ -80,6 +129,7 @@ const listenMoveItem = () => {
       checkEmptyItem();
       setMove();
       setDraggable();
+      listenDrag();
       if (checkWin()) {
         const modal = document.querySelector('.modal-wrapper');
         renderModal();
@@ -116,6 +166,7 @@ const listenShuffle = () => {
       checkEmptyItem();
       setTime();
       setDraggable();
+      listenDrag();
     }
   });
 };
@@ -154,56 +205,6 @@ const listenCloseWinners = () => {
       const winners = document.querySelector('.winnner');
       game.style = 'display:flex';
       winners.style = 'display:none';
-    }
-  });
-};
-const listenDrag = () => {
-  const frame = document.querySelector('.frame');
-  const empty = getEmptyItem();
-  // eslint-disable-next-line no-console
-  console.log('hello');
-  frame.addEventListener('dragstart', (event) => {
-    event.target.classList.add('selected');
-  });
-  frame.addEventListener('dragend', (event) => {
-    event.preventDefault();
-    event.target.classList.remove('selected');
-  });
-
-  empty.addEventListener('dragover', (event) => {
-    event.preventDefault();
-    empty.classList.add('active-dropzone');
-  }, false);
-  empty.addEventListener('dragleave', (event) => {
-    event.preventDefault();
-    empty.classList.remove('active-dropzone');
-  });
-  empty.addEventListener('drop', (event) => {
-    event.preventDefault();
-    const selected = document.querySelector('.selected');
-    if (event.target.closest('.empty-item')) {
-      event.target.classList.remove('active-dropzone');
-      const selectedIdI = selected.id[0];
-      const selectedIdJ = selected.id[1];
-      const emptyIdI = empty.id[0];
-      const emptyIdJ = empty.id[1];
-      store.out[emptyIdI][emptyIdJ] = store.out[selectedIdI][selectedIdJ];
-      store.out[selectedIdI][selectedIdJ] = ' ';
-      store.countMove += 1;
-      renderFrame();
-      setSizeItem();
-      renderMove();
-      checkEmptyItem();
-      setMove();
-      setDraggable();
-      if (checkWin()) {
-        const modal = document.querySelector('.modal-wrapper');
-        renderModal();
-        show(modal);
-        store.time.sec = document.getElementById('sec').childNodes[0].nodeValue;
-        store.time.min = document.getElementById('min').childNodes[0].nodeValue;
-        store.win.push({ view: `${store.view}х${store.view}`, countMove: `${store.countMove}`, time: `${store.time.min}:${store.time.sec}` });
-      }
     }
   });
 };

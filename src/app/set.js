@@ -1,4 +1,5 @@
 import store from './store';
+import sound from '../public/assets/sound/schelchok.mp3';
 
 /* eslint-disable no-restricted-syntax */
 const setSizeItem = () => {
@@ -87,7 +88,7 @@ const setMove = () => {
 
 const setSoundMove = () => {
   const audio = new Audio();
-  audio.src = '../public/assets/sound/schelchok.mp3';
+  audio.src = sound;
   audio.autoplay = true;
 };
 

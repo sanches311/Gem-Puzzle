@@ -43,7 +43,7 @@ const getTimeHtml = () => {
     min = saveStore.time.min;
   }
   return `
-  <span class='count-time'>  Time: <span id='min' class='count-time'>${min}</span>:<span id='sec' class='count-time'>${sec}</span></span>  
+  <span class='count-time'>  Time: <span id='min' class='count-time'>${min}</span>:<span id='sec' class='count-time'>${sec}</span></span>
   `;
 };
 
@@ -64,24 +64,36 @@ const getModalHtml = () => `
   `;
 
 const getWinnersHtml = () => {
-  let html = '';
+  let html = `
+  <caption>Victory table</caption>
+      <tr>
+          <th>Size</th>
+          <th>Move</th>
+          <th>Time</th>
+      </tr>
+  `;
   for (let i = 0; i < store.win.length; i++) {
-    html += `<div class='win-item'>${i} size:${store.win[i].view}, moves: ${store.win[i].countMove}, time:${store.win[i].time} <div>`;
+    html += `
+    <tr>
+        <td>${store.win[i].view}</td>
+        <td>${store.win[i].countMove}</td>
+        <td>${store.win[i].time}</td>
+    </tr>`;
   }
   return html;
 };
 
 const getWinHtml = () => `
 <div class='winnner'>
-  <div class ="winner-content">    
-  </div>
+  <table class ="winner-content">
+  </table>
   <div>
   <button class='winners-close-btn'>Close</button>
   </div>
 </div>`;
 
 function getStartHtml() {
-  return ` 
+  return `
    <div class='wrapper'>
       <div class='content'>
           <div class='menu'>
@@ -91,24 +103,25 @@ function getStartHtml() {
               <button id = 'result-btn' class='menu-btn'>Result</button>
           </div>
           <div class='info'>
-          <span class='info-move'>${getMoveHtml()}</span>
-          <span class='info-time'>${getTimeHtml()}</span>
-                       
+              <span class='info-move'>${getMoveHtml()}</span>
+              <span class='info-time'>${getTimeHtml()}</span>
           </div>
+          <div class='wrapper-frame'>
           <div class='frame'>
               ${getFrameHtml()}
           </div>
-          <div class='frame-current'>            
+          </div>
+          <div class='frame-current'>
               ${getFrameSizeHtml()}
           </div>
-          <div class='Frame-all'>
+          <div class='frame-all'>
             <span class='frame-size-tex'>Other size:</span>
-            <span class='frame-size'>3х3</span>
-            <span class='frame-size active-size-frame'>4х4</span>
-            <span class='frame-size'>5х5</span>
-            <span class='frame-size'>6х6</span>
-            <span class='frame-size'>7х7</span>
-            <span class='frame-size'>8х8</span>           
+            <button class='frame-size'>3х3</button>
+            <button class='frame-size active-size-frame'>4х4</button>
+            <button class='frame-size'>5х5</button>
+            <button class='frame-size'>6х6</button>
+            <button class='frame-size'>7х7</button>
+            <button class='frame-size'>8х8</button>
           </div>
       </div>
   </div>
