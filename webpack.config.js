@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 let mode = 'development';
 if (process.env.NODE_ENV === 'production') {
@@ -29,12 +30,13 @@ module.exports = {
       filename: 'index.html',
     }),
     new CleanWebpackPlugin(),
-    new ESLintPlugin()    
+    new ESLintPlugin(),
+    new MiniCssExtractPlugin(),
   ],
   module: {
     rules: [
       { test: /\.js$/, exclude: /node_modules/, use: ['babel-loader'] },
-      { test: /\.css$/, use: ['style-loader', 'css-loader'] },
+      { test: /\.css$/, use: [{ loader: MiniCssExtractPlugin.loader, options: { publicPath: '../' } }, 'style-loader', 'css-loader'] },
       { test: /\.scss$/, use: ['style-loader', 'css-loader', 'sass-loader'] },
       { test: /\.(png|jpe?g|gif|svg|webp|ico)$/i, type: mode === 'production' ? 'asset' : 'asset/resource' },
       { test: /\.(mp3|wav|ogg)$/i, type: mode === 'production' ? 'asset' : 'asset/resource' },
