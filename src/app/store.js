@@ -24,6 +24,16 @@ const store = {
       time: '10:15',
     },
   ],
+  initArray() {
+    const arr = [];
+    for (let i = 1; i < this.view ** 2; i++) {
+      arr.push(i);
+    }
+    arr.push(0);
+    for (let i = 0; i < this.view; i++) {
+      this.out.push(arr.splice(0, this.view));
+    }
+  },
   fillArray() {
     const arr = this.shuffle();
     for (let i = 0; i < this.view; i++) {

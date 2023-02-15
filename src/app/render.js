@@ -13,7 +13,7 @@ const render = () => {
     store.countMove = saveStore.countMove;
     store.out = saveStore.out;
   } else {
-    store.fillArray();
+    store.initArray();
   }
   document.body.innerHTML = getStartHtml();
   setSizeItem();

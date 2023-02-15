@@ -64,7 +64,7 @@ const listenChangeFrameSize = () => {
       store.view = Number(event.target.textContent[0]);
       store.out.length = 0;
       store.countMove = 0;
-      store.fillArray();
+      store.initArray();
       renderFrame();
       renderFrameSize();
       renderMove();
