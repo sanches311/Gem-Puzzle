@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
 const store = {
+  start: false,
   view: 4,
   countMove: 0,
   out: [],

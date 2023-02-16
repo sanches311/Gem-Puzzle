@@ -51,7 +51,7 @@ const getModalHtml = () => `
   <div class='modal-wrapper'>
     <div class='modal-content'>
         <div class='modal-win'>
-            Your win!
+            You win!
         </div>
         <div class='modal-move'>
             ${getMoveHtml()}

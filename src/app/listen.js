@@ -6,11 +6,14 @@ import {
   setSizeItem, setTime, setMove, setSoundMove, setDraggable, getEmptyItem,
 } from './set';
 import { checkWin, checkEmptyItem } from './check';
-import { hide, show } from './utils';
+import { getTime, hide, show } from './utils';
 
 function listenDrag() {
   const empty = getEmptyItem();
+  // eslint-disable-next-line consistent-return
   document.addEventListener('dragstart', (event) => {
+    // eslint-disable-next-line no-alert
+    if (!store.start) return alert('Press shuffle and start to start the game');
     event.target.classList.add('selected');
   });
   document.addEventListener('dragend', (event) => {
@@ -62,6 +65,7 @@ const listenChangeFrameSize = () => {
       document.querySelector('.active-size-frame').classList.remove('active-size-frame');
       event.target.classList.add('active-size-frame');
       store.view = Number(event.target.textContent[0]);
+      store.start = false;
       store.out.length = 0;
       store.countMove = 0;
       store.initArray();
@@ -70,17 +74,22 @@ const listenChangeFrameSize = () => {
       renderMove();
       setSizeItem();
       checkEmptyItem();
+      getEmptyItem();
       setTime();
       setDraggable();
       listenDrag();
     }
   });
 };
+
 const listenMoveItem = () => {
+  // eslint-disable-next-line consistent-return
   document.addEventListener('click', (event) => {
     event.preventDefault();
     if (event.target.closest('.frame-item')) {
       event.preventDefault();
+      // eslint-disable-next-line no-alert
+      if (!store.start) return alert('Press shuffle and start to start the game');
       const i = Number(event.target.id[0]);
       const j = Number(event.target.id[1]);
       if (j !== store.out.length - 1) {
@@ -159,6 +168,7 @@ const listenShuffle = () => {
     if (event.target.closest('#shuffle-btn')) {
       store.countMove = 0;
       store.out.length = 0;
+      store.start = true;
       store.fillArray();
       renderFrame();
       renderMove();
@@ -167,6 +177,7 @@ const listenShuffle = () => {
       setTime();
       setDraggable();
       listenDrag();
+      getTime();
     }
   });
 };
